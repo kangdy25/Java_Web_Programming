@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>page 지시어 - errorPage, isErrorPage 속성</title>
-</head>
+</head
 <body>
   <%
     int myAge = Integer.parseInt(request.getParameter("age")) + 10;
