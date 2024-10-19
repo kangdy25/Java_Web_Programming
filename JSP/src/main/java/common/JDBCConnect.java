@@ -19,9 +19,9 @@ public class JDBCConnect {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             // DB에 연결
-            String url = "-";
-            String id = "-";
-            String pwd ="-";
+            String url = "";
+            String id = "";
+            String pwd = "";
             con = DriverManager.getConnection(url, id, pwd);
 
             System.out.println("Connected to Oracle DB (기본 생성자)");

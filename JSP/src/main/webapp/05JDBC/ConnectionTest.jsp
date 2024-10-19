@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="common.JDBCConnect"%>
+<%@ page import="common.DBConnPool"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -31,6 +32,11 @@
     <%
         JDBCConnect jdbc3 = new JDBCConnect(application);
         jdbc3.close();
+    %>
+    <h2>커넥트 풀 테스트</h2>
+    <%
+        DBConnPool pool = new DBConnPool();
+        pool.close();
     %>
 </body>
 </html>
