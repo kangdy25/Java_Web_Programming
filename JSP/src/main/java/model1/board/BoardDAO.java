@@ -6,7 +6,6 @@ import common.JDBCConnect;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.Objects;
 
 public class BoardDAO extends JDBCConnect {
     public BoardDAO(ServletContext application) {
@@ -68,5 +67,28 @@ public class BoardDAO extends JDBCConnect {
         }
 
         return bbs;
+    }
+
+    // 게시글 데이터를 받아 DB에 추가합니다.
+    public int insertWrite(BoardDTO dto) {
+        int result = 0;
+
+        try {
+            String query = "INSERT INTO board ( " +
+                    " num, title, content, id, visitcount) " +
+                    " VALUES ( " +
+                    " seq_board_num.NEXTVAL, ?, ?, ?, 0)";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getId());
+
+            result = psmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("게시물 입력 중 예외 발생");
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
