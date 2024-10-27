@@ -140,4 +140,28 @@ public class BoardDAO extends JDBCConnect {
             e.printStackTrace();
         }
     }
+
+    // 지정한 게시물을 수정합니다.
+    public int updateEdit(BoardDTO dto) {
+        int result = 0;
+
+        try {
+            // 쿼리문
+            String query = "UPDATE board SET "
+                    + " title=?, content=? "
+                    + " WHERE num=?";
+
+            // 쿼리문 완성
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getNum());
+
+            result = psmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("게시물 수정 중 예외 발생");
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

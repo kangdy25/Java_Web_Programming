@@ -33,19 +33,19 @@
         <table border="1" width="90%">
             <tr>
                 <td>번호</td>
-                <td><%= dto.getNum() %>></td>
+                <td><%= dto.getNum() %></td>
                 <td>작성자</td>
-                <td><%= dto.getName() %>></td>
+                <td><%= dto.getName() %></td>
             </tr>
             <tr>
                 <td>작성일</td>
                 <td><%= dto.getPostdate() %></td>
                 <td>조회수</td>
-                <td><%= dto.getVisitcount() %>></td>
+                <td><%= dto.getVisitcount() %></td>
             </tr>
             <tr>
                 <td>제목</td>
-                <td colspan="3"><%= dto.getTitle() %>></td>
+                <td colspan="3"><%= dto.getTitle() %></td>
             </tr>
             <tr>
                 <td>내용</td>
@@ -62,7 +62,7 @@
                     <%
                         }
                     %>
-                    <button type="button" onclick="location.href='List.jsp">
+                    <button type="button" onclick="location.href='List.jsp';">
                         목록 보기
                     </button>
                 </td>
