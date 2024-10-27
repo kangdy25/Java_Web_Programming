@@ -11,6 +11,7 @@ public class BoardDAO extends JDBCConnect {
     public BoardDAO(ServletContext application) {
         super(application);
     }
+
     // 검색 조건에 맞는 게시물의 개수를 반환합니다.
     public int selectCount(Map<String, Object> map) {
         int totalCount = 0;
@@ -90,5 +91,53 @@ public class BoardDAO extends JDBCConnect {
         }
 
         return result;
+    }
+
+    // 저장한 게시물을 찾아 내용을 반환합니다.
+    public BoardDTO selectView(String num) {
+        BoardDTO dto = new BoardDTO();
+
+        // 쿼리문
+        String query = "SELECT B.*, M.name "
+                + "FROM member M INNER JOIN board B"
+                + " ON M.id = B.id "
+                + " WHERE num = ?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, num);
+            rs = psmt.executeQuery();
+
+            // 결과 처리
+            if (rs.next()) {
+                dto.setNum(rs.getString(1));
+                dto.setTitle(rs.getString(2));
+                dto.setContent(rs.getString("content"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setId(rs.getString("id"));
+                dto.setVisitcount(rs.getString(6));
+                dto.setName(rs.getString("name"));
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 상세보기 예외 발생");
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    // 지정한 게시물의 조회수를 1씩 증가시킵니다.
+    public void updateVisitCount(String num) {
+        String query = "UPDATE board SET "
+                        + " visitcount = visitcount+1 "
+                        + " WHERE num=?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, num);
+            psmt.executeQuery();
+        } catch (Exception e) {
+            System.out.println("게시물 조회수 증가 중 예외 발생");
+            e.printStackTrace();
+        }
     }
 }
